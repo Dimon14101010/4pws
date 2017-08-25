@@ -1,0 +1,28 @@
+.enterpage-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.enterpage-container{
+  display: flex;
+  flex-direction: column;
+  background-color: #ff3753;
+  padding: 20px;
+  height: 100%;
+}
+.enterpage-item{
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+}
+.enterpage-item:hover{
+  padding: 20px;
+  background-color: white;
+  text-align: center;
+  font-size: 20px;
+  color: #ff3753;
+  transition: all ease-out 0.5s;
+}
+
