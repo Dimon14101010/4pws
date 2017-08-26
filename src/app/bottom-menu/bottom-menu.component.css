@@ -1,0 +1,17 @@
+.bottom-menu-wrapper{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.bottom-menu-container{
+  width: 100%;
+  display: flex;
+  background-color: #5a6173;
+  justify-content: center;
+}
+.bottom-menu-item{
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  color: white;
+}

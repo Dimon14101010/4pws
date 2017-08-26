@@ -1,5 +1,47 @@
+<app-top-menu></app-top-menu>
 <div class="dashboard-wrapper">
 
-  <div class="dashboard-list-container">list</div>
-  <div class="dashboard-map-container">map</div>
+  <div class="dashboard-list-container">
+    <div *ngFor="let place of venuesList; let i = index" class="venue-item" (mouseover)="newMarker(i)">
+      <div class="venue-item-header">
+        <div *ngIf="place.venue.photos.groups[0]?.items[0].prefix; then photoSrc else iconSrc"></div>
+          <ng-template #photoSrc><img class="venue-item-photo" [src]="place.venue.photos.groups[0]?.items[0].prefix +'88x88'+ place.venue.photos.groups[0]?.items[0].suffix"
+             [title]="place.venue.categories[0]?.name">
+          </ng-template>
+          <ng-template #iconSrc>
+            <img class="venue-item-photo" [src]="place.venue?.categories[0].icon.prefix +'bg_88'+ place.venue.categories[0].icon.suffix"
+                 [title]="place.venue?.categories[0].name">
+          </ng-template>
+
+          <div class="venue-item-text-block">
+            <div class="venue-item-name">{{place.venue?.name}}</div>
+            <div class="venue-item-address">{{place.venue?.location.address}}</div>
+          </div>
+      </div>
+
+      <div class="venue-item-icon">
+        <img [src]="place.venue?.categories[0].icon.prefix +'bg_32'+ place.venue.categories[0].icon.suffix"
+        [title]="place.venue?.categories[0].name">
+      </div>
+    </div>
+  </div>
+  <div class="dashboard-map-container">
+
+    <agm-map #gm
+             [latitude]=coordinates.latitude
+             [longitude]=coordinates.longitude
+             [zoom]="12">
+      <agm-marker [id]="im"
+                  *ngFor="let marker of venuesList; let im = index"
+                  [latitude]="marker.venue.location.lat"
+                  [longitude]="marker.venue.location.lng"
+                  [title]="im.toString()"
+                  (markerClick)="gm.lastOpen?.close(); gm.lastOpen = infoWindow">
+        <agm-info-window #infoWindow [id]="im" ngModel="" [(isOpen)]="testMarker">
+          {{marker.venue?.categories[0].name}}
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </div>
 </div>
+<app-bottom-menu></app-bottom-menu>
