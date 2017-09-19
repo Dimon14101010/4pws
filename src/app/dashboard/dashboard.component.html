@@ -2,7 +2,7 @@
 <div class="dashboard-wrapper">
 
   <div class="dashboard-list-container">
-    <div *ngFor="let place of venuesList; let i = index" class="venue-item" (mouseover)="newMarker(i)">
+    <div *ngFor="let place of venuesList | slice:0:itemsOnpage; let i = index" class="venue-item" (mouseenter)="place.flag = true" (mouseleave)="place.flag = false">
       <div class="venue-item-header">
         <div *ngIf="place.venue.photos.groups[0]?.items[0].prefix; then photoSrc else iconSrc"></div>
           <ng-template #photoSrc><img class="venue-item-photo" [src]="place.venue.photos.groups[0]?.items[0].prefix +'88x88'+ place.venue.photos.groups[0]?.items[0].suffix"
@@ -15,30 +15,43 @@
 
           <div class="venue-item-text-block">
             <div class="venue-item-name">{{place.venue?.name}}</div>
+            <div class="venue-item-categories">
+              <div class="venue-item-icon">
+                <img [src]="place.venue?.categories[0].icon.prefix +'bg_32'+ place.venue.categories[0].icon.suffix"
+                     [title]="place.venue?.categories[0].name">
+              </div>
+              {{place.venue?.categories[0].name}}</div>
             <div class="venue-item-address">{{place.venue?.location.address}}</div>
           </div>
       </div>
+      <!--<div class="comment-container">-->
+        <!--<div class="venue-item-comments-photo" *ngIf="place.tips[0]?.user.photo.prefix; then iconComSrc else nonIconSrc"></div>-->
+          <!--<ng-template #iconComSrc>-->
+            <!--<img [src]="place.tips[0].user.photo.prefix +'36x36'+ place.tips[0].user.photo.suffix">-->
+            <!--<div class="venue-item-comments">{{place.tips[0]?.text}}</div>-->
+          <!--</ng-template>-->
+          <!--<ng-template #nonIconSrc><div>hello</div></ng-template>-->
+      <!--</div>-->
 
-      <div class="venue-item-icon">
-        <img [src]="place.venue?.categories[0].icon.prefix +'bg_32'+ place.venue.categories[0].icon.suffix"
-        [title]="place.venue?.categories[0].name">
-      </div>
     </div>
+    <div class="more-items-btn" *ngIf="itemsOnpage < venuesList.length"(click)="addItems()">more items</div>
   </div>
   <div class="dashboard-map-container">
-
-    <agm-map #gm
+    <div class="search-btn"> search here</div>
+    <agm-map #gm [scrollwheel]="false"
              [latitude]=coordinates.latitude
              [longitude]=coordinates.longitude
              [zoom]="12">
       <agm-marker [id]="im"
-                  *ngFor="let marker of venuesList; let im = index"
+                  *ngFor="let marker of venuesList | slice:0:itemsOnpage; let im = index"
                   [latitude]="marker.venue.location.lat"
                   [longitude]="marker.venue.location.lng"
                   [title]="im.toString()"
                   (markerClick)="gm.lastOpen?.close(); gm.lastOpen = infoWindow">
-        <agm-info-window #infoWindow [id]="im" ngModel="" [(isOpen)]="testMarker">
-          {{marker.venue?.categories[0].name}}
+        <agm-info-window #infoWindow [id]="im" [(isOpen)]="marker.flag">
+          {{marker.venue?.name}}
+          {{marker.venue?.contact.phone}}
+          <img [src]="marker.venue.featuredPhotos?.items[0].prefix + '32x32' + marker.venue.featuredPhotos?.items[0].suffix">
         </agm-info-window>
       </agm-marker>
     </agm-map>

@@ -2,5 +2,5 @@ body,html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #424655;
+  background: -webkit-linear-gradient(top, #6aaef7 0%,#81fc6f 100%);
 }

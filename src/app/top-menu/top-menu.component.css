@@ -1,7 +1,8 @@
 .top-menu-wrapper{
-  background-color: #ff3753;
+  margin: 0;
   display: flex;
   flex-direction: row-reverse;
+  height: 60px;
 }
 
 .top-menu-item{

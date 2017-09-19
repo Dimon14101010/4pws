@@ -10,6 +10,7 @@ import {AgmInfoWindow} from "@agm/core";
 })
 export class DashboardComponent implements OnInit {
   testMarker;
+  itemsOnpage = 10;
   suffix: any;
   coordinates: any = {};
   venue: any = {};
@@ -39,5 +40,7 @@ export class DashboardComponent implements OnInit {
   newMarker (i, s){
     this.testMarker = !this.testMarker;
   }
-
+  addItems () {
+    this.itemsOnpage += this.itemsOnpage
+  }
 }
