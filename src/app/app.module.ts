@@ -11,6 +11,10 @@ import { BottomMenuComponent } from './bottom-menu/bottom-menu.component';
 import {HttpClientModule} from "@angular/common/http";
 import {GeolocationService} from "./geoLocation.service";
 import {AgmCoreModule, AgmInfoWindow, InfoWindowManager} from "@agm/core";
+import {AngularFireModule} from "angularfire2";
+import {AngularFireAuthModule} from "angularfire2/auth";
+import {environment} from "../environments/environment";
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +22,14 @@ import {AgmCoreModule, AgmInfoWindow, InfoWindowManager} from "@agm/core";
     EnterPageComponent,
     DashboardComponent,
     TopMenuComponent,
-    BottomMenuComponent
+    BottomMenuComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     HttpClientModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyAwdJD1FBcEsHDgriQfKXn_FeY1EL_4f1Q'})
   ],

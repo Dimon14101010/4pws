@@ -44,3 +44,13 @@ export class DashboardComponent implements OnInit {
     this.itemsOnpage += this.itemsOnpage
   }
 }
+
+
+// var config = {
+//   apiKey: "AIzaSyB9qVUbmkY9Rb7zOAjcCFwVeCHkKRivRH0",
+//   authDomain: "project-agilie.firebaseapp.com",
+//   databaseURL: "https://project-agilie.firebaseio.com",
+//   projectId: "project-agilie",
+//   storageBucket: "",
+//   messagingSenderId: "128373483912"
+// };
